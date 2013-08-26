@@ -13,6 +13,8 @@ if ($QueryName -eq '') {
     write-host
 
     foreach ($objItem in $colItems) {
+        $objItem.Name = $objItem.Name -replace "\\\\\?\\Volume{","Volume-"
+        $objItem.Name = $objItem.Name -replace "}\\","`+"
         $objItem.Name = $objItem.Name -replace "\\","/"
         $line =  " { `"{#FSNAME}`":`"" + $objItem.Name + "`" , `"{#FSTYPE}`":`"" + $objItem.FileSystem + "`" },"
         write-host $line
@@ -25,7 +27,9 @@ if ($QueryName -eq '') {
 }
 
 else {
-    $FSName = [regex]::escape($FSName)
+    #$FSName = [regex]::escape($FSName)
+    $FSName = $FSName -replace "Volume-","\\\\?\\Volume{"
+    $FSName = $FSName -replace "\+","}\\"
     $FSName = $FSName -replace "/","\\"
     switch ($QueryName)
         {
