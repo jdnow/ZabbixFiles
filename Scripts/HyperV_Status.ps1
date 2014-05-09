@@ -13,7 +13,12 @@ if ($QueryName -eq '') {
     write-host
 
     foreach ($objItem in $colItems) {
-        $line =  " { `"{#VMNAME}`":`"" + $objItem.Name + "`" , `"{#VMSTATE}`":`"" + $objItem.State + "`" },"
+        if ($objItem -ne $colItems[-1]) {
+            $line =  " { `"{#VMNAME}`":`"" + $objItem.Name + "`" },"
+            }
+        else {
+            $line =  " { `"{#VMNAME}`":`"" + $objItem.Name + "`" }"
+            }
         write-host $line
     }
 
