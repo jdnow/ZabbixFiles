@@ -7,14 +7,22 @@
 if ($QueryName -eq '') {
     
     $colItems = Get-VM
+    $idx=$colItems.Name.Count
 
     write-host "{"
     write-host " `"data`":["
     write-host
 
     foreach ($objItem in $colItems) {
-        $line =  " { `"{#VMNAME}`":`"" + $objItem.Name + "`" , `"{#VMSTATE}`":`"" + $objItem.State + "`" },"
-        write-host $line
+    	if($idx -eq 1){
+	    $line =  " { `"{#VMNAME}`":`"" + $objItem.Name + "`" , `"{#VMSTATE}`":`"" + $objItem.State + "`" }"
+	    write-host $line
+	}
+	else{
+	    $line =  " { `"{#VMNAME}`":`"" + $objItem.Name + "`" , `"{#VMSTATE}`":`"" + $objItem.State + "`" },"
+	    write-host $line
+	    $idx--
+	}
     }
 
     write-host

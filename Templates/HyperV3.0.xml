@@ -446,7 +446,17 @@
                             <valuemap/>
                         </item_prototype>
                     </item_prototypes>
-                    <trigger_prototypes/>
+                    <trigger_prototypes>
+                        <trigger_prototype>
+                            <expression>{Hyper_V_Template:hyperv.check[State,{#VMNAME}].str(Running)}&lt;&gt;0</expression>
+                            <name>{#VMNAME} is not running</name>
+                            <url/>
+                            <status>0</status>
+                            <priority>4</priority>
+                            <description/>
+                            <type>0</type>
+                        </trigger_prototype>
+                    </trigger_prototypes>
                     <graph_prototypes/>
                 </discovery_rule>
             </discovery_rules>
